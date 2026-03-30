@@ -4,6 +4,7 @@ import os
 import yaml
 import logging
 from sklearn.feature_extraction.text import CountVectorizer
+import pickle
 
 logging.basicConfig(
     level=logging.INFO,
@@ -54,6 +55,8 @@ def apply_bow(x_train, x_test, max_features: int):
 
         x_train_bow = vectorizer.fit_transform(x_train)
         x_test_bow = vectorizer.transform(x_test)
+
+        pickle.dump(vectorizer, open("models/vectorizer.pkl", "wb"))
 
         logging.info("Bag of Words transformation completed")
         return x_train_bow, x_test_bow

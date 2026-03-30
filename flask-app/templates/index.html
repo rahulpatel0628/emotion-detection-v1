@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis App</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            background: #ffffff;
+            color: #333;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            resize: none;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            animation: slideUp 0.6s ease-in-out;
+        }
+
+        .positive {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .negative {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .neutral {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .emoji {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .text-box {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        @keyframes slideUp {
+            from {transform: translateY(20px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+        <p>Analyze emotions using MLflow-powered MLOps pipeline</p>
+
+        <form action="/predict" method="post">
+            <textarea name="text" rows="6" placeholder="Type your sentence..."></textarea>
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+
+        {% if prediction %}
+            {% if prediction == 1 %}
+                <div class="result-box positive">
+                    <div class="emoji">😊</div>
+                    <h2>Happy Sentiment</h2>
+            {% elif prediction == 0 %}
+                <div class="result-box negative">
+                    <div class="emoji">😡</div>
+                    <h2>Sad Sentiment</h2>
+            {% else %}
+                <div class="result-box neutral">
+                    <div class="emoji">😐</div>
+                    <h2>Neutral Sentiment</h2>
+            {% endif %}
+
+                    <div class="text-box">
+                        <strong>Processed Text:</strong><br>
+                        {{ normalized }}
+                    </div>
+                </div>
+        {% endif %}
+
+        <div class="footer">
+            Built with Flask • MLflow • DagsHub
+        </div>
+    </div>
+
+</body>
+</html>

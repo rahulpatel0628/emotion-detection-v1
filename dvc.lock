@@ -44,8 +44,8 @@ stages:
       nfiles: 2
     - path: src/features/feature_engineering.py
       hash: md5
-      md5: f2c8fbe6d51e99bf8a33e965e412fde3
-      size: 3680
+      md5: 2c75568b047354e2538b09919fb8cf14
+      size: 3767
     params:
       params.yaml:
         feature_engineering.max_features: 1000

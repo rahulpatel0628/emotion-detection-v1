@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentiment Analysis App</title>
+    <title>Sentiment Analysis</title>
 
     <style>
         body {
@@ -128,15 +128,15 @@
             {% if prediction == 1 %}
                 <div class="result-box positive">
                     <div class="emoji">😊</div>
-                    <h2>Happy Sentiment</h2>
+                    <h2>Happy</h2>
             {% elif prediction == 0 %}
                 <div class="result-box negative">
                     <div class="emoji">😡</div>
-                    <h2>Sad Sentiment</h2>
+                    <h2>Sad</h2>
             {% else %}
                 <div class="result-box neutral">
                     <div class="emoji">😐</div>
-                    <h2>Neutral Sentiment</h2>
+                    <h2>Neutral</h2>
             {% endif %}
 
                     <div class="text-box">

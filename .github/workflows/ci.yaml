@@ -50,3 +50,6 @@ jobs:
           DAGSHUB_PAT: ${{ secrets.DAGSHUB_PAT }}
         run: |
           python scripts/promot_model.py
+      - name: Test falsk app
+        runs: |
+          python -m unittest tests/test_flask_app.py

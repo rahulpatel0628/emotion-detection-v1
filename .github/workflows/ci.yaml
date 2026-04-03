@@ -46,10 +46,13 @@ jobs:
         run: |
           python -m unittest tests/test_model.py
       - name: promote model to production
+        if: success()
         env:
           DAGSHUB_PAT: ${{ secrets.DAGSHUB_PAT }}
         run: |
           python scripts/promot_model.py
+
       - name: Test falsk app
-        runs: |
+        if: success()
+        run: |
           python -m unittest tests/test_flask_app.py

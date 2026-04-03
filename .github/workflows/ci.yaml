@@ -27,5 +27,7 @@ jobs:
           python -c "import nltk; nltk.download('wordnet')"
 
       - name: run pipeline
+        env:
+          DAGSHUB_PAT: ${{ secrets.DAGSHUB_PAT }}
         run: |
           dvc repro

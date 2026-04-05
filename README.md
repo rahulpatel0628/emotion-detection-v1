@@ -1,55 +1,44 @@
-# Emotion Detection from Text (MLOps Project)
+# 🚀 Emotion Detection from Text (End-to-End MLOps Project)
 
-## Overview
+## 📌 Overview
 
-This project focuses on building an **end-to-end MLOps pipeline** for detecting emotions from textual data. It covers everything from data processing to model deployment readiness using modern industry tools.
+This project implements a complete **end-to-end MLOps pipeline** for detecting emotions from textual data. It covers everything from data ingestion to model deployment using tools like MLflow, DVC, Docker, and CI/CD.
 
 ---
 
-## Key Features
+## 🎯 Key Features
 
-* Complete ML Pipeline (Data → Model → Deployment Ready)
+* Complete ML Pipeline (Data → Model → Deployment)
 * Experiment Tracking using MLflow + DagsHub
 * Data & Pipeline Versioning using DVC + AWS S3
 * Automated Workflow using DVC Pipelines
-* Multiple Model Comparison & Hyperparameter Tuning
-* Model Versioning with MLflow Model Registry (Staging)
+* Multiple Model Training & Comparison
+* Hyperparameter Tuning
+* Model Versioning with MLflow Registry
+* REST API using Flask
+* Dockerized Deployment
+* CI/CD Automation with GitHub Actions
 
 ---
 
-## Project Workflow
+## ⚙️ Project Workflow
 
-### 1️⃣ Data Ingestion
+### 1. Data Ingestion
 
 * Load raw text dataset
 
-### 2️⃣ Data Preprocessing
+### 2. Data Preprocessing
 
 * Text cleaning
 * Tokenization
 * Stopword removal
 
-### 3️⃣ Feature Engineering
+### 3. Feature Engineering
 
 * Bag of Words (CountVectorizer)
 * TF-IDF (TfidfVectorizer)
 
----
-
-### 4️⃣ Baseline Models
-
-* Built models using:
-
-  * BOW
-  * TF-IDF
-
-* Compared performance
-
----
-
-### 5️⃣ Model Training
-
-Trained multiple models:
+### 4. Model Training
 
 * Logistic Regression
 * Random Forest
@@ -57,61 +46,114 @@ Trained multiple models:
 * XGBoost
 * Naive Bayes
 
----
+### 5. Model Selection
 
-### 6️⃣ Model Selection
-
-* Best Model: **Logistic Regression with BOW**
+* Best Model: Logistic Regression (BOW)
 * Accuracy: ~80%
 
----
+### 6. Hyperparameter Tuning
 
-### 7️⃣ Hyperparameter Tuning
+* C = 1.0
+* solver = liblinear
+* penalty = l2
 
-Optimized:
+### 7. Experiment Tracking
 
-* `C = 1.0`
-* `solver = liblinear`
-* `penalty = l2`
+Using MLflow + DagsHub:
 
----
+* Parameters
+* Metrics
+* Models
+* Artifacts
 
-### 8️⃣ Experiment Tracking
+### 8. Pipeline Automation (DVC)
 
-* Used **MLflow with DagsHub**
-* Logged:
+Pipeline stages:
 
-  * Parameters
-  * Metrics
-  * Models
-  * Artifacts
+* data_ingestion
+* preprocessing
+* feature_engineering
+* model_training
+* evaluation
+* registration
 
----
+### 9. Data Versioning
 
-### 9️⃣ Pipeline Automation (DVC)
-
-* Created modular pipeline:
-
-  * data_ingestion
-  * preprocessing
-  * feature_engineering
-  * model_training
-  * evaluation
-  * registration
-
----
-
-### 🔟 Data Versioning
-
-* DVC integrated with **AWS S3**
+* DVC integrated with AWS S3
 * Ensures reproducibility
 
+### 10. Model Registration
+
+* Registered using MLflow
+* Promoted to Staging
+
 ---
 
-### 1️⃣1️⃣ Model Registration
+## 🌐 Flask API (Model Serving)
 
-* Registered model using **run_id**
-* Promoted to **Staging stage**
+The trained model is served using a Flask API.
+
+### Endpoint
+
+POST /predict
+
+### Example Request
+
+{
+"text": "I am feeling very happy today!"
+}
+
+### Example Response
+
+{
+"emotion": "joy"
+}
+
+---
+
+## 🐳 Docker (Containerization)
+
+### Build Image
+
+docker build -t emotiondetection .
+
+### Run Container
+
+docker run -p 8888:5000 emotiondetection
+
+### Access App
+
+http://localhost:8888
+
+---
+
+## ⚙️ CI/CD Pipeline (GitHub Actions)
+
+On every push:
+
+1. Install dependencies
+2. Run unit tests
+3. Build Docker image
+4. Push Docker image to Docker Hub
+
+---
+
+## 🧪 Testing
+
+Run model tests:
+python -m unittest tests/test_model.py
+
+Run Flask tests:
+python -m unittest tests/test_flask_app.py
+
+---
+
+## 📊 Results
+
+* Accuracy: ~0.78
+* Precision: ~0.76
+* Recall: ~0.80
+* F1 Score: ~0.78
 
 ---
 
@@ -123,95 +165,58 @@ Optimized:
 * DagsHub
 * DVC
 * AWS S3
-* Git
+* Flask
+* Docker
+* GitHub Actions
 
 ---
 
 ## 📁 Project Structure
 
-------------
-
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── data_ingestion.py
-             └── data_preprocessing.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── feature_engineering.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── model_building.py
-    │   │   └── model_evaluation.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
-
+data/
+models/
+notebooks/
+reports/
+src/
+tests/
+requirements.txt
+Dockerfile
+dvc.yaml
+README.md
 
 ---
 
 ## ⚡ How to Run
 
-```bash
-# Install dependencies
+Install dependencies:
 pip install -r requirements.txt
 
-# Run pipeline
+Run pipeline:
 dvc repro
-```
 
 ---
 
-## 📊 Results
+## 🔄 End-to-End Flow
 
-| Metric    | Value |
-| --------- | ----- |
-| Accuracy  | ~0.78 |
-| Precision | ~0.76 |
-| Recall    | ~0.80 |
-| F1 Score  | ~0.78 |
+Data → Preprocessing → Feature Engineering → Model Training → MLflow
+→ DVC Pipeline → Model Registry → Flask API → Docker → CI/CD → Docker Hub
 
 ---
 
-## 🎯 Future Improvements
+## 🚀 Future Improvements
 
-* Deploy using FastAPI
-* Add CI/CD pipeline
-* Implement model monitoring
-* Add real-time inference
+* Deploy on AWS / Render / GCP
+* Convert Flask → FastAPI
+* Add model monitoring
+* Real-time inference
+* Logging & alerting
 
 ---
 
-## 🙌 Conclusion
+## 💡 Conclusion
 
-This project demonstrates a **complete MLOps lifecycle**, focusing on reproducibility, scalability, and real-world best practices.
+This project demonstrates a complete MLOps lifecycle focusing on reproducibility, scalability, automation, and production readiness.
+
+---
+
+

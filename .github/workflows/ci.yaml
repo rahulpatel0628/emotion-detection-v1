@@ -76,7 +76,7 @@ jobs:
         run: |
           docker build -t  emotioc_ecr .
         
-        - name: Tag Docker image
+      - name: Tag Docker image
         run: |
           docker tag emotioc_ecr:latest 065882629527.dkr.ecr.eu-north-1.amazonaws.com/emotioc_ecr:latest1
         
